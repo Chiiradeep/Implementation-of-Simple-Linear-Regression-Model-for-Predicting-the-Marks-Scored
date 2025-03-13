@@ -8,22 +8,83 @@ To write a program to predict the marks scored by a student using the simple lin
 2. Anaconda – Python 3.7 Installation / Jupyter notebook
 
 ## Algorithm
-1. 
-2. 
-3. 
-4. 
+1. Import the standard Libraries. 
+2. Set variables for assigning dataset values.
+3. Import linear regression from sklearn.
+4. Assign the points for representing in the graph.
+5. Predict the regression for marks by using the representation of the graph
+6. Compare the graphs and hence we obtained the linear regression for the given datas.
 
 ## Program:
-```
+```python
 /*
 Program to implement the simple linear regression model for predicting the marks scored.
-Developed by: 
-RegisterNumber:  
+Developed by: CHIIRADEEP R
+RegisterNumber: 212224240028 
 */
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.metrics import mean_absolute_error,mean_squared_error
+df=pd.read_csv('student_scores.csv')
+print(df)
+df.head(0)
+df.tail(0)
+print(df.head())
+print(df.tail())
+x = df.iloc[:,:-1].values
+print(x)
+y = df.iloc[:,1].values
+print(y)
+from sklearn.model_selection import train_test_split
+x_train,x_test,y_train,y_test=train_test_split(x,y,test_size=1/3,random_state=0)
+from sklearn.linear_model import LinearRegression
+regressor = LinearRegression()
+regressor.fit(x_train,y_train)
+y_pred = regressor.predict(x_test)
+print(y_pred)
+print(y_test)
+#Graph plot for training data
+plt.scatter(x_train,y_train,color='black')
+plt.plot(x_train,regressor.predict(x_train),color='blue')
+plt.title("Hours vs Scores(Training set)")
+plt.xlabel("Hours")
+plt.ylabel("Scores")
+plt.show()
+#Graph plot for test data
+plt.scatter(x_test,y_test,color='black')
+plt.plot(x_train,regressor.predict(x_train),color='red')
+plt.title("Hours vs Scores(Testing set)")
+plt.xlabel("Hours")
+plt.ylabel("Scores")
+plt.show()
+mse=mean_absolute_error(y_test,y_pred)
+print('MSE = ',mse)
+mae=mean_absolute_error(y_test,y_pred)
+print('MAE = ',mae)
+rmse=np.sqrt(mse)
+print("RMSE= ",rmse)
 ```
 
 ## Output:
-![simple linear regression model for predicting the marks scored](sam.png)
+DATASET:
+![Screenshot 2025-03-13 094310](https://github.com/user-attachments/assets/1d147f40-dd3c-46c4-94d7-939a734c3609)
+HEAD VALUES :
+![Screenshot 2025-03-13 094320](https://github.com/user-attachments/assets/83f96591-fda0-4889-81fe-6969515f505d)
+TAIL VALUES:
+![Screenshot 2025-03-13 095021](https://github.com/user-attachments/assets/ba7c4be6-ed74-4d04-9d3c-3877b3dcd426)
+X AND Y VALUES:
+![Screenshot 2025-03-13 095116](https://github.com/user-attachments/assets/76599986-b50b-45a5-bbb3-bd38df320c65)
+PREDICTION VALUES OF X AND Y :
+![Screenshot 2025-03-13 095214](https://github.com/user-attachments/assets/3f01264b-8de7-4f8a-ae11-c8f5fc67ceeb)
+MSE,MAE,RMSE VALUES :
+![WhatsApp Image 2025-03-13 at 09 52 24_195498c6](https://github.com/user-attachments/assets/ae8084d1-73d2-4052-9d59-4263d00390c2)
+TRAINING SET :
+![Screenshot 2025-03-13 094352](https://github.com/user-attachments/assets/a8618a53-6aac-4fbe-a743-05368dc295c3)
+TESTING SET:
+![Screenshot 2025-03-13 094359](https://github.com/user-attachments/assets/6ebdca72-ef31-4a92-8a28-663ffd7cb940)
+
+
 
 
 ## Result:
